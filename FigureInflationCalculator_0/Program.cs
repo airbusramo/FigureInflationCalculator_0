@@ -17,8 +17,10 @@ float oldConversionRate = 0;
 float newConversionRate = 0;
 float oldTotalPriceEGP = 0;
 float newTotalPriceEGP = 0;
-float differenceEGP = 0;
 float offsetEGPFloat = 0;
+float moneyAccountFloat = 0;
+float differenceEGP = 0;
+float moneyRemaining = 0;
 float oldTotalPriceEGPOffset = 0;
 float newTotalPriceEGPOffset = 0;
 
@@ -45,28 +47,30 @@ Console.WriteLine();
 Console.Write("Old Figure JPY Price: ");
 string oldPriceJPYString = Console.ReadLine();
 int.TryParse(oldPriceJPYString, out oldPriceJPYInt);
-Console.WriteLine();
 
 Console.Write("Old Figure EGP Price: ");
 string oldPriceEGPString = Console.ReadLine();
 float.TryParse(oldPriceEGPString, out oldPriceEGPFloat);
-Console.WriteLine();
 
 Console.Write("New Figure JPY Price: ");
 string newPriceJPYString = Console.ReadLine();
 int.TryParse(newPriceJPYString, out newPriceJPYInt);
-Console.WriteLine();
 
 Console.Write("New Figure EGP Price: ");
 string newPriceEGPString = Console.ReadLine();
 float.TryParse(newPriceEGPString, out newPriceEGPFloat);
 Console.WriteLine();
 
-Console.WriteLine("Now enter in an offset for the total EGP price if needed.");
-Console.WriteLine();
-
+Console.WriteLine("Now enter in an offset for the total EGP price.");
 string offsetEGPString = Console.ReadLine();
 float.TryParse(offsetEGPString, out offsetEGPFloat);
+Console.WriteLine();
+
+Console.WriteLine("Finally, enter how much money you have to calculate if you have enough.");
+string moneyAccountString = Console.ReadLine();
+float.TryParse(moneyAccountString, out moneyAccountFloat);
+Console.WriteLine();
+Console.WriteLine();
 
 oldConversionRate = oldPriceEGPFloat / oldPriceJPYInt;
 newConversionRate = newPriceEGPFloat / newPriceJPYInt;
@@ -75,7 +79,7 @@ newTotalPriceEGP = totalPriceJPY * newConversionRate;
 differenceEGP = newTotalPriceEGP - oldTotalPriceEGP;
 oldTotalPriceEGPOffset = oldTotalPriceEGP + offsetEGPFloat;
 newTotalPriceEGPOffset = newTotalPriceEGP + offsetEGPFloat;
-Console.WriteLine();
+moneyRemaining = moneyAccountFloat - newTotalPriceEGPOffset;
 
 Console.WriteLine("Here are the results.");
 Console.WriteLine();
@@ -88,8 +92,19 @@ Console.WriteLine("Total new EGP price: {0}", newTotalPriceEGP);
 Console.WriteLine();
 
 Console.WriteLine("Total old EGP price with offset: {0}", oldTotalPriceEGPOffset);
-Console.WriteLine("Total old EGP price with offset: {0}", newTotalPriceEGPOffset);
+Console.WriteLine("Total new EGP price with offset: {0}", newTotalPriceEGPOffset);
 Console.WriteLine();
+
+if (moneyRemaining >= 0)
+{
+    Console.WriteLine("You have enough money.");
+    Console.WriteLine();
+}
+else
+{
+    Console.WriteLine("You don't have enough money. You need to add {0}.", Math.Abs(moneyRemaining));
+    Console.WriteLine();
+}
 
 Console.WriteLine("Press any key to close the program.");
 Console.ReadKey();
