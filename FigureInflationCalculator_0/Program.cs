@@ -39,7 +39,7 @@ while (totalPriceDone == false)
 }
 
 Console.WriteLine();
-Console.WriteLine("To calculate the old conversion rate, enter the old and new figure price in JPY and EGP.");
+Console.WriteLine("To calculate the conversion rates, enter the old and new figure prices in JPY and EGP.");
 Console.WriteLine();
 
 Console.Write("Old Figure JPY Price: ");
